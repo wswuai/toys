@@ -1,0 +1,5 @@
+*.csv
+*.out
+*.jar
+target/
+.DS_Store
