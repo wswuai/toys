@@ -30,27 +30,27 @@ div.wrapper
     height : 500px;
     width : 768px;
     background: pink;
+    overflow : hidden;
 }
 div.left
 {
     width : 300px;
     background: #3636ac;
-    float:right;
+    float:left;
 }
 div.right
 {
     width : 400px;
     background:black;
-    float:left;
-}
-h1.ii
-{
-
+    float:right;
 }
 
 
 
 </style>
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -61,8 +61,12 @@ h1.ii
 
 <div class = "wrapper">
     <div class = "wrapper left"></div>
-    <div class = "wrapper right"></div>
-    <h1 class = "ii"> HI! I'm HERE!</h1>
+    <div class = "wrapper right">
+        <div style="margin:30px;">
+            <img style='height:100px;margin:10px'src='http://www.baidu.com/img/bdlogo.png'>
+            <img style='height:100px;margin:10px'src='http://www.baidu.com/img/bdlogo.png'>
+            <img style='height:100px;margin:10px'src='http://www.baidu.com/img/bdlogo.png'>
+    </div>
 </div>
 </body>
 
