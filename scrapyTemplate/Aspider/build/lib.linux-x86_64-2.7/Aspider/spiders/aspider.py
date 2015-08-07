@@ -5,9 +5,6 @@ from scrapy.spiders import CrawlSpider, Rule
 
 from Aspider.items import AspiderItem
 
-import logging
-logger = logging.getLogger(__name__)
-
 
 def delete_space_foreach(lis):
     d = lambda x:x .replace(' ','') .replace('\t','') .replace('\n','')
@@ -35,7 +32,11 @@ class AspiderSpider(CrawlSpider):
         i = AspiderItem()
         if None == response.xpath('//span[@id="productTitle"]/text()').extract():
             return None
-        i['name']= response.xpath('//span[@id="productTitle"]/text()').extract()[0]
+        try:
+            i['name']= response.xpath('//span[@id="productTitle"]/text()').extract()[0]
+        except Exception:
+            self.logger.warning("cannot find name, skip." + response.request.url)
+            return
 
         i['rate']= response.xpath('//div[@id="avgRating"]/span/text()').extract()
         if len(i['rate'])>0:
@@ -45,7 +46,6 @@ class AspiderSpider(CrawlSpider):
         i['ASIN'] = response.request.url.split(r'/')[-1]
         i['price'] = response.xpath('//span[@id="priceblock_ourprice"]/text()').extract()
 
-        #logger.info("crawled : " + i['name'])
 
         #i['domain_id'] = response.xpath('//input[@id="sid"]/@value').extract()
         #i['name'] = response.xpath('//div[@id="name"]').extract()
@@ -67,4 +67,5 @@ class AspiderSpider(CrawlSpider):
         #i['details'] = "\n" .join(i['details'])
 
 
+        self.logger.info("crawled : " + i['name'])
         return i

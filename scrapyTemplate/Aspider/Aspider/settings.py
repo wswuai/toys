@@ -14,8 +14,12 @@ BOT_NAME = 'Aspider'
 SPIDER_MODULES = ['Aspider.spiders']
 NEWSPIDER_MODULE = 'Aspider.spiders'
 
+import logging
+LOG_LEVEL = logging.INFO
+
 import os
 SPLASH_SERVER = os.environ.get('SPLASH_SERVER')
+
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
