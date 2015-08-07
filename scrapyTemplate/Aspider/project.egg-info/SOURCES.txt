@@ -1,0 +1,13 @@
+setup.py
+Aspider/__init__.py
+Aspider/items.py
+Aspider/pipelines.py
+Aspider/settings.py
+Aspider/spiders/__init__.py
+Aspider/spiders/aspider.py
+Aspider/spiders/cnaspider.py
+project.egg-info/PKG-INFO
+project.egg-info/SOURCES.txt
+project.egg-info/dependency_links.txt
+project.egg-info/entry_points.txt
+project.egg-info/top_level.txt
