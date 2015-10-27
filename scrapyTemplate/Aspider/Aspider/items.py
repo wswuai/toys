@@ -18,3 +18,6 @@ class AspiderItem(scrapy.Item):
     details = scrapy.Field()
     category = scrapy.Field()
     price = scrapy.Field()
+
+class BinItem(scrapy.Item):
+    pass

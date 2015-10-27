@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#import scrapy
+#from scrapy import Request
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 
@@ -21,7 +21,18 @@ def delete_space_foreach(lis):
 class AspiderSpider(CrawlSpider):
     name = 'aspider'
     allowed_domains = ['amazon.com']
-    start_urls = ['http://www.amazon.com/']
+    start_urls =  ['http://www.amazon.com/']
+
+    def start_requests(self):
+        if self.settings['START_URL'] is not None:
+            self.logger.info(  "settings found!")
+            for i in self.settings['START_URL']:
+                yield self.make_requests_from_url(i)
+        else:
+            self.logger.info(  "settings not found!")
+            for i in self.start_urls:
+                yield self.make_requests_from_url(i)
+
 
     rules = (
         Rule(LinkExtractor(allow=r'.*\/dp\/.*'), callback='parse_item', follow=True),
@@ -33,7 +44,7 @@ class AspiderSpider(CrawlSpider):
         if None == response.xpath('//span[@id="productTitle"]/text()').extract():
             return None
         try:
-            i['name']= response.xpath('//span[@id="productTitle"]/text()').extract()[0]
+            i['name']= response.xpath('//head/title/text()').extract()[0]
         except Exception:
             self.logger.warning("cannot find name, skip." + response.request.url)
             return
@@ -67,5 +78,5 @@ class AspiderSpider(CrawlSpider):
         #i['details'] = "\n" .join(i['details'])
 
 
-        self.logger.info("crawled : " + i['name'])
+        #self.logger.info("crawled : " + i['name'])
         return i
